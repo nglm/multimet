@@ -8,7 +8,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-from ...multimet.preprocessing.extraction import preprocess_meteogram
+from multimet.preprocessing.extraction import preprocess_meteogram
 from ...utils.plt import from_list_to_pairplots
 
 

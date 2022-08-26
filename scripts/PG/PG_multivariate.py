@@ -5,7 +5,7 @@ import json
 import matplotlib.pyplot as plt
 
 
-from ...multimet.preprocessing.extraction import preprocess_meteogram, jsonify, numpify
+from multimet.preprocessing.extraction import preprocess_meteogram, jsonify, numpify
 import persigraph as pg
 from persigraph.persistentgraph.plots import *
 

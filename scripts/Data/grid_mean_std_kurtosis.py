@@ -11,7 +11,7 @@ from scipy.stats import kurtosis
 
 
 
-from ...multimet.preprocessing.extraction import preprocess_meteogram
+from multimet.preprocessing.extraction import preprocess_meteogram
 from ...utils.plt import pretty_subplots
 
 import cartopy.crs as ccrs

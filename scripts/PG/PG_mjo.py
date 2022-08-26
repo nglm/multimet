@@ -4,7 +4,7 @@ import numpy as np
 import json
 import matplotlib.pyplot as plt
 
-from ...multimet.preprocessing.extraction import preprocess_mjo, jsonify, to_polar
+from multimet.preprocessing.extraction import preprocess_mjo, jsonify, to_polar
 import persigraph as pg
 from persigraph.persistentgraph.plots import *
 

@@ -3,7 +3,7 @@ from os import listdir, makedirs
 import numpy as np
 import matplotlib.pyplot as plt
 
-from ...multimet.preprocessing.extraction import preprocess_meteogram
+from multimet.preprocessing.extraction import preprocess_meteogram
 import persigraph as pg
 from persigraph.persistentgraph.plots import *
 
