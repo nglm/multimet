@@ -5,9 +5,9 @@ import json
 import matplotlib.pyplot as plt
 
 
-from ...Preprocessing.extraction import preprocess_meteogram, jsonify, numpify
-from ...PersistentGraph import PersistentGraph
-from ...PersistentGraph.plots import *
+from ...multimet.preprocessing.extraction import preprocess_meteogram, jsonify, numpify
+import persigraph as pg
+from persigraph.persistentgraph.plots import *
 
 
 
@@ -196,7 +196,7 @@ def main():
                     # Construct graph
                     # ---------------------------
 
-                    g = PersistentGraph(
+                    g = pg.PersistentGraph(
                             time_axis = data_dict['time'],
                             members = members,
                             weights = weights_values,

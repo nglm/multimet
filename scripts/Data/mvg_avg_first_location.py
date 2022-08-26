@@ -5,7 +5,7 @@ from os import listdir, makedirs
 import numpy as np
 import matplotlib.pyplot as plt
 
-from ...Preprocessing.extraction import preprocess_meteogram, moving_average
+from ...multimet.preprocessing.extraction import preprocess_meteogram, moving_average
 from ...utils.plt import from_list_to_subplots
 
 

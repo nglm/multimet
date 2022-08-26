@@ -7,8 +7,8 @@ from matplotlib.patches import Rectangle
 import datetime
 from netCDF4 import Dataset
 
-from ...PersistentGraph import PersistentGraph
-from ...PersistentGraph.plots import *
+import persigraph as pg
+from persigraph.persistentgraph.plots import *
 from ...utils.nc import print_nc_dict
 from ...utils.plt import from_list_to_subplots
 
@@ -467,7 +467,7 @@ def select_best_examples():
         # Construct graph
         # ---------------------------
 
-        g = PersistentGraph(
+        g = pg.PersistentGraph(
                 time_axis = d['time'][i][:max_t[k]],
                 members = d['var'][i][:, :max_t[k]],
                 score_type = score,
@@ -599,7 +599,7 @@ def select_best_examples():
         # Construct graph
         # ---------------------------
 
-        g = PersistentGraph(
+        g = pg.PersistentGraph(
                 time_axis = d['time'][i][:max_t[k]],
                 members = d['var'][i][:, :max_t[k]]/1000,
                 score_type = score,
@@ -731,7 +731,7 @@ def select_best_examples():
         # ---------------------------
         # Construct graph
         # ---------------------------
-        g = PersistentGraph(
+        g = pg.PersistentGraph(
                 time_axis = d['time'][i][:max_t[k]],
                 members = members,
                 score_type = score,
@@ -1009,7 +1009,7 @@ def main(show_obs=True):
                         # Construct graph
                         # ---------------------------
 
-                        g = PersistentGraph(
+                        g = pg.PersistentGraph(
                                 time_axis = d['time'][i],
                                 members = d['var'][i],
                                 score_type = score,
@@ -1130,7 +1130,7 @@ def talk_figs():
         # Construct graph
         # ---------------------------
 
-        g = PersistentGraph(
+        g = pg.PersistentGraph(
                 time_axis = d['time'][i][:max_t[k]],
                 members = d['var'][i][:, :max_t[k]],
                 score_type = score,
@@ -1249,7 +1249,7 @@ def talk_figs():
         # Construct graph
         # ---------------------------
 
-        g = PersistentGraph(
+        g = pg.PersistentGraph(
                 time_axis = d['time'][i][:max_t[k]],
                 members = d['var'][i][:, :max_t[k]],
                 score_type = score,
@@ -1361,7 +1361,7 @@ def talk_figs():
         # Construct graph
         # ---------------------------
 
-        g = PersistentGraph(
+        g = pg.PersistentGraph(
                 time_axis = d['time'][i][:max_t[k]],
                 members = d['var'][i][:, :max_t[k]]/1000,
                 score_type = score,
@@ -1498,7 +1498,7 @@ def talk_figs():
         # ---------------------------
         # Construct graph
         # ---------------------------
-        g = PersistentGraph(
+        g = pg.PersistentGraph(
                 time_axis = d['time'][i][min_t[k]:max_t[k]],
                 members = members,
                 score_type = score,

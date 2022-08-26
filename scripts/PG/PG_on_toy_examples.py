@@ -7,8 +7,8 @@ import sys
 from os.path import isfile
 from matplotlib.animation import FuncAnimation, PillowWriter
 
-from ...PersistentGraph import PersistentGraph
-from ...PersistentGraph.plots import *
+import persigraph as pg
+from persigraph.persistentgraph.plots import *
 
 # ---------------------------------------------------------
 # Parameters
@@ -107,7 +107,7 @@ def plot_pg_mean_std(
     # ------------------------------------
     if g is None:
 
-        g = PersistentGraph(
+        g = pg.PersistentGraph(
             time_axis = xvalues,
             members = members,
             score_type = score_type,
@@ -323,7 +323,7 @@ def make_gif_best():
                 weights = None
 
             # Construct graph
-            g = PersistentGraph(members, time_axis=xvalues)
+            g = pg.PersistentGraph(members, time_axis=xvalues)
             g.construct_graph()
 
             # Get animation
@@ -344,7 +344,7 @@ def make_gif_best():
             if weights is not None:
 
                 # Construct graph
-                g = PersistentGraph(members, time_axis=xvalues, weights=weights)
+                g = pg.PersistentGraph(members, time_axis=xvalues, weights=weights)
                 g.construct_graph()
 
                 # Get animation
