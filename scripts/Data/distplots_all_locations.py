@@ -8,8 +8,8 @@ from os import listdir, makedirs
 import numpy as np
 import matplotlib.pyplot as plt
 
-from multimet.preprocessing.extraction import preprocess_meteogram
-from ...utils.plt import from_list_to_subplots
+from multimet.preprocess import meteogram
+from multimet.utils.plt import from_list_to_subplots
 
 # ---------------------------------------------------------
 # Parameters:
@@ -59,7 +59,7 @@ for use_log_tcwv in [False, False]:
     for to_standardize in [True, False]:
         for filename in LIST_FILENAMES:
 
-            data_dict = preprocess_meteogram(
+            data_dict = meteogram(
                 filename = filename,
                 path_data = PATH_DATA,
                 var_names = var_names,

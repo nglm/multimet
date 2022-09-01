@@ -4,7 +4,7 @@ from random import shuffle
 from math import cos, sin, pi
 from typing import List, Dict
 
-from ...utils.lists import flatten
+from multimet.utils.lists import flatten
 
 
 # TODO: allow for multivariate gaussian in gauss_mixture

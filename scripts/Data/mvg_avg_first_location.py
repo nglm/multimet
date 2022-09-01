@@ -5,8 +5,8 @@ from os import listdir, makedirs
 import numpy as np
 import matplotlib.pyplot as plt
 
-from multimet.preprocessing.extraction import preprocess_meteogram, moving_average
-from ...utils.plt import from_list_to_subplots
+from multimet.preprocess import meteogram, moving_average
+from multimet.utils.plt import from_list_to_subplots
 
 
 # ---------------------------------------------------------
@@ -60,7 +60,7 @@ LIST_FILENAMES = [
 
 for filename in LIST_FILENAMES:
 
-    data_dict = preprocess_meteogram(
+    data_dict = meteogram(
         filename = filename,
         path_data = PATH_DATA,
         var_names = var_names,

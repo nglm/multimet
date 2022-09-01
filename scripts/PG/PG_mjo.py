@@ -4,7 +4,7 @@ import numpy as np
 import json
 import matplotlib.pyplot as plt
 
-from multimet.preprocessing.extraction import preprocess_mjo, jsonify, to_polar
+from multimet.preprocess import mjo, jsonify, to_polar
 import persigraph as pg
 from persigraph.persistentgraph.plots import *
 
@@ -95,7 +95,7 @@ def main():
             # ---------------------------
             # Load and preprocess data
             # ---------------------------
-            data_dict = preprocess_mjo(
+            data_dict = mjo(
                 filename = filename,
                 path_data = PATH_DATA,
                 smooth = smooth,
@@ -140,7 +140,7 @@ def main():
                     if polar:
                         json_file += '_polar'
                         # Re-load data with polar coordinates
-                        data_dict_tmp = preprocess_mjo(
+                        data_dict_tmp = mjo(
                             filename = filename,
                             path_data = PATH_DATA,
                             smooth = False,

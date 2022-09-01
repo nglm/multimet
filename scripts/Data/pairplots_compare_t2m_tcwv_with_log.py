@@ -8,8 +8,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-from multimet.preprocessing.extraction import preprocess_meteogram
-from ...utils.plt import from_list_to_pairplots
+from multimet.preprocess import meteogram
+from multimet.utils.plt import from_list_to_pairplots
 
 
 # ---------------------------------------------------------
@@ -65,7 +65,7 @@ use_standardise = True
 makedirs(path_fig, exist_ok = True)
 for filename in list_filenames:
 
-    data_dict = preprocess_meteogram(
+    data_dict = meteogram(
         filename = filename,
         path_data = path_data,
         var_names = var_names,

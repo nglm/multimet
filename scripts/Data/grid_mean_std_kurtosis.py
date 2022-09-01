@@ -11,8 +11,8 @@ from scipy.stats import kurtosis
 
 
 
-from multimet.preprocessing.extraction import preprocess_meteogram
-from ...utils.plt import pretty_subplots
+from multimet.preprocess import meteogram
+from multimet.utils.plt import pretty_subplots
 
 import cartopy.crs as ccrs
 import cartopy
@@ -85,7 +85,7 @@ for use_log_tcwv in [False]:
                 f = path_data + filename
                 nc = Dataset(f,'r')
 
-                data_dict = preprocess_meteogram(
+                data_dict = meteogram(
                     filename = filename,
                     path_data = path_data,
                     var_names = var_names,

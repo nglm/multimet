@@ -20,8 +20,8 @@ import matplotlib.pyplot as plt
 from scipy.stats import norm, kurtosis
 from typing import List, Sequence, Union, Any, Dict
 
-from ..utils.plt import get_nrows_ncols_from_nplots, get_subplot_indices
-from ..utils.npy import running_mean
+from .utils.plt import get_nrows_ncols_from_nplots, get_subplot_indices
+from .utils.npy import running_mean
 
 
 

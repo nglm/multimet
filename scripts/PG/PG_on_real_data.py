@@ -3,7 +3,7 @@ from os import listdir, makedirs
 import numpy as np
 import matplotlib.pyplot as plt
 
-from multimet.preprocessing.extraction import preprocess_meteogram
+from multimet.preprocess import meteogram
 import persigraph as pg
 from persigraph.persistentgraph.plots import *
 
@@ -103,7 +103,7 @@ def main():
                 # Load and preprocess data
                 # ---------------------------
 
-                data_dict = preprocess_meteogram(
+                data_dict = meteogram(
                     filename = filename,
                     path_data = PATH_DATA,
                     var_names=var_names,

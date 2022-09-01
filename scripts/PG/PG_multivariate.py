@@ -5,7 +5,7 @@ import json
 import matplotlib.pyplot as plt
 
 
-from multimet.preprocessing.extraction import preprocess_meteogram, jsonify, numpify
+from multimet.preprocess import meteogram, jsonify, numpify
 import persigraph as pg
 from persigraph.persistentgraph.plots import *
 
@@ -98,7 +98,7 @@ def main():
         # Load and preprocess data
         # ---------------------------------------
 
-        data_dict = preprocess_meteogram(
+        data_dict = meteogram(
             filename = filename,
             path_data = PATH_DATA,
             var_names=var_names,

@@ -4,8 +4,8 @@ from os import listdir, makedirs
 import matplotlib.pyplot as plt
 from scipy.cluster.hierarchy import dendrogram, linkage
 
-from multimet.preprocessing.extraction import preprocess_meteogram
-from ...utils.plt import plot_mean_and_std
+from multimet.preprocess import meteogram
+from multimet.utils.plt import plot_mean_and_std
 
 
 
@@ -157,7 +157,7 @@ def PCA_2_components_pipeline(
 def main():
     for filename in LIST_FILENAMES:
 
-        data_dict = preprocess_meteogram(
+        data_dict = meteogram(
             filename = filename,
             path_data = PATH_DATA,
             var_names=['t2m'],

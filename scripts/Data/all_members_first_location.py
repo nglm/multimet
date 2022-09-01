@@ -6,8 +6,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from netCDF4 import Dataset
 
-from multimet.preprocessing.extraction import preprocess_meteogram
-from ...utils.plt import from_list_to_subplots
+from multimet.preprocess import meteogram
+from multimet.utils.plt import from_list_to_subplots
 
 # ---------------------------------------------------------
 # Parameters:
@@ -63,7 +63,7 @@ for filename in LIST_FILENAMES:
     # To get the right variable names and units
     nc = Dataset(PATH_DATA + filename,'r')
 
-    data_dict = preprocess_meteogram(
+    data_dict = meteogram(
         filename = filename,
         path_data = PATH_DATA,
         var_names = var_names,

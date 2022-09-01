@@ -9,8 +9,8 @@ from netCDF4 import Dataset
 
 import persigraph as pg
 from persigraph.persistentgraph.plots import *
-from ...utils.nc import print_nc_dict
-from ...utils.plt import from_list_to_subplots
+from multimet.utils.nc import print_nc_dict
+from multimet.utils.plt import from_list_to_subplots
 
 
 

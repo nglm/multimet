@@ -5,8 +5,8 @@ from math import atan2
 from netCDF4 import Dataset
 from typing import List, Sequence, Union, Any, Dict, Tuple
 
-from .statistics import standardize
-from ..utils.lists import get_indices_element
+from .stats import standardize
+from .utils.lists import get_indices_element
 
 
 
@@ -106,7 +106,7 @@ def extract_from_meteogram(
     return d
 
 
-def preprocess_meteogram(
+def meteogram(
     filename: str,
     path_data: str = '',
     var_names: Union[List[str], str] = ['t2m'],
@@ -325,7 +325,7 @@ def extract_from_mjo(
 
     return d
 
-def preprocess_mjo(
+def mjo(
     filename: str,
     path_data: str = '',
     smooth: bool = False,

@@ -5,8 +5,8 @@ import numpy as np
 from netCDF4 import Dataset
 import matplotlib.pyplot as plt
 
-from multimet.preprocessing.statistics import extract_from_meteogram
-from ...utils.plt import from_list_to_subplots
+from multimet.stats import extract_from_meteogram
+from multimet.utils.plt import from_list_to_subplots
 
 
 
