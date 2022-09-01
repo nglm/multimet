@@ -8,7 +8,7 @@ from os.path import isfile
 from matplotlib.animation import FuncAnimation, PillowWriter
 
 import persigraph as pg
-from persigraph.persistentgraph.plots import *
+
 
 # ---------------------------------------------------------
 # Parameters
@@ -122,7 +122,7 @@ def plot_pg_mean_std(
 
     # Plot Graph
     ax0 = fig.add_subplot(gs[:, 0:2])
-    _, ax0 = plot_as_graph(
+    _, ax0 = pg.plots.graph(
         g, show_vertices=True, show_edges=True,ax=ax0,
         show_std=True)
     ax0.set_title("Graph method")

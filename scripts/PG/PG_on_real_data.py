@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 from multimet.preprocess import meteogram
 import persigraph as pg
-from persigraph.persistentgraph.plots import *
+
 
 
 
@@ -179,14 +179,14 @@ def main():
 
                 # If overview:
                 if show_k_plot == 'overview':
-                    fig0, ax0 = plot_overview(
+                    fig0, ax0 = pg.plots.overview(
                         g, k_max=8, show_vertices=True, show_edges=True,
                         show_std = True, ax_kw=ax_kw, ax = ax0, fig=fig0,
                     )
                     name_fig += '_overview'
 
                 else:
-                    fig0, ax0 = plot_as_graph(
+                    fig0, ax0 = pg.plots.graph(
                         g, show_vertices=True, show_edges=True, show_std = True,
                         ax_kw=ax_kw, ax = ax0, fig=fig0,
                     )

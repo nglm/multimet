@@ -7,10 +7,11 @@ license = "MIT"
 
 [tool.poetry.dependencies]
 python = ">=3.8,<3.12"
-persigraph = {git = "git@github.com:nglm/persigraph.git"}
 netCDF4 = "^1.6.0"
 pandas = "^1.4.3"
 seaborn = "^0.11.2"
+persigraph = {git = "git@github.com:nglm/persigraph.git"}
+
 
 [tool.poetry.dev-dependencies]
 

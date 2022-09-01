@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 from multimet.preprocess import mjo, jsonify, to_polar
 import persigraph as pg
-from persigraph.persistentgraph.plots import *
+
 
 
 
@@ -109,13 +109,13 @@ def main():
             if save_spaghetti:
 
                 # ---- Typical MJO plot ----
-                fig_m, ax_m = plot_mjo_members(
+                fig_m, ax_m = pg.plots.mjo_members(
                     members = members,
                     show_classes = True,
                     )
 
                 # ------ add mean and std------
-                fig_m, ax_m = plot_mjo_mean_std(
+                fig_m, ax_m = pg.plots.mjo_mean_std(
                         members = members,
                         show_classes = True,
                         polar = False,
@@ -164,7 +164,7 @@ def main():
                         else:
                             members_tmp = np.copy(members)
 
-                        fig_m, ax_m = plot_mjo_mean_std(
+                        fig_m, ax_m = pg.plots.mjo_mean_std(
                             members = members_tmp,
                             show_classes = True,
                             polar = polar_mean,
@@ -190,7 +190,7 @@ def main():
                     for i in range(len(members)-1):
                         m = members[i:i+1]
 
-                        fig_m, ax_m = plot_mjo_members(
+                        fig_m, ax_m = pg.plots.mjo_members(
                             members = m,
                             show_classes = True,
                             )
@@ -206,11 +206,11 @@ def main():
                         plt.close()
 
                 # ---- RMM1 RRM2 ----
-                fig, ax = plot_members(
+                fig, ax = pg.plots.members(
                     members = members,
                     time_axis = time,
                 )
-                fig, ax = plot_mean_std(
+                fig, ax = pg.plots.mean_std(
                     members = members,
                     time_axis = time,
                     fig = fig,
@@ -229,11 +229,11 @@ def main():
 
                 # ---- Polar coordinates ----
                 members_polar = to_polar(members)
-                fig, ax = plot_members(
+                fig, ax = pg.plots.members(
                     members = members_polar,
                     time_axis = time,
                 )
-                fig, ax = plot_mean_std(
+                fig, ax = pg.plots.mean_std(
                     members = members_polar,
                     time_axis = time,
                     fig = fig,
@@ -290,7 +290,7 @@ def main():
 
                     # If overview:
                     if show_k_plot == 'overview':
-                        fig0, ax0 = plot_overview(
+                        fig0, ax0 = pg.plots.overview(
                             g, ax_kw=ax_kw, axs = None, fig= None,
                         )
                         name_fig += '_overview'

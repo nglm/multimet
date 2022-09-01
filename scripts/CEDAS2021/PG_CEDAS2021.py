@@ -8,7 +8,7 @@ import datetime
 from netCDF4 import Dataset
 
 import persigraph as pg
-from persigraph.persistentgraph.plots import *
+
 from multimet.utils.nc import print_nc_dict
 from multimet.utils.plt import from_list_to_subplots
 
@@ -512,7 +512,7 @@ def select_best_examples():
 
         # ---- Plot Graph ----
         ax1 = fig.add_subplot(gs[:, m//3:2*m//3], sharex=ax0)
-        _, ax1 = plot_as_graph(
+        _, ax1 = pg.plots.graph(
             g, show_vertices=True, show_edges=True,ax=ax1,
             show_std=True)
         ax1.set_title(" ")
@@ -541,7 +541,7 @@ def select_best_examples():
         relevant_k[-3:-2] = [[2, 0] for _ in range(len(relevant_k[-3:-2]))]
         relevant_components = g.get_relevant_components(relevant_k)
         ax3 = fig.add_subplot(gs[:, 2*m//3:], sharex=ax0)
-        _, ax3 = plot_most_revelant_components(
+        _, ax3 = revelant_components(
             g, relevant_components=relevant_components,
             show_vertices=True, show_edges=True,ax=ax3,
             show_std=True)
@@ -645,7 +645,7 @@ def select_best_examples():
 
         # ---- Plot Graph ----
         ax1 = fig.add_subplot(gs[:, m//2:], sharex=ax0)
-        _, ax1 = plot_most_revelant_components(
+        _, ax1 = revelant_components(
             g, show_vertices=True, show_edges=True,ax=ax1,
             show_std=True)
         ax1.sharey(ax0)
@@ -752,7 +752,7 @@ def select_best_examples():
 
         # ---- Plot Graph ----
         ax0 = fig.add_subplot(gs[:, (m-n_box)//2:-n_box])
-        _, ax0 = plot_as_graph(
+        _, ax0 = pg.plots.graph(
             g, show_vertices=True, show_edges=True,ax=ax0,
             show_std=True)
         ax0.set_title(" ")
@@ -1035,7 +1035,7 @@ def main(show_obs=True):
                         fig_suptitle = filename + "\n" + d['var_name']
 
 
-                        fig0, ax0 = plot_overview(
+                        fig0, ax0 = pg.plots.overview(
                             g, k_max=8, show_vertices=True, show_edges=True,
                             show_std = True, ax_kw=ax_kw, ax = ax0, fig=fig0,
                         )
@@ -1168,7 +1168,7 @@ def talk_figs():
 
         # ---- Plot Graph ----
         ax1 = fig.add_subplot(gs[:, m//3:2*m//3], sharex=ax0)
-        _, ax1 = plot_as_graph(
+        _, ax1 = pg.plots.graph(
             g, show_vertices=True, show_edges=True,ax=ax1,
             show_std=True)
         ax1.set_title(" ")
@@ -1193,7 +1193,7 @@ def talk_figs():
         relevant_k[-3:-2] = [[2, 0] for _ in range(len(relevant_k[-3:-2]))]
         relevant_components = g.get_relevant_components(relevant_k)
         ax3 = fig.add_subplot(gs[:, 2*m//3:], sharex=ax0)
-        _, ax3 = plot_most_revelant_components(
+        _, ax3 = revelant_components(
             g, relevant_components=relevant_components,
             show_vertices=True, show_edges=True,ax=ax3,
             show_std=True)
@@ -1280,7 +1280,7 @@ def talk_figs():
 
         # ---- Plot Graph ----
         ax1 = fig.add_subplot(gs[:, m//3:2*m//3], sharex=ax0)
-        _, ax1 = plot_as_graph(
+        _, ax1 = pg.plots.graph(
             g, show_vertices=True, show_edges=True,ax=ax1,
             show_std=True)
         ax1.set_title(" ")
@@ -1295,7 +1295,7 @@ def talk_figs():
 
         # ---- Most relevant ----
         ax3 = fig.add_subplot(gs[:, 2*m//3:], sharex=ax0)
-        _, ax3 = plot_most_revelant_components(
+        _, ax3 = revelant_components(
             g,
             show_vertices=True, show_edges=True,ax=ax3,
             show_std=True)
@@ -1390,7 +1390,7 @@ def talk_figs():
 
         # ---- Plot Graph ----
         ax1 = fig.add_subplot(gs[:, m//2:], sharex=ax0)
-        _, ax1 = plot_most_revelant_components(
+        _, ax1 = revelant_components(
             g, show_vertices=True, show_edges=True,ax=ax1,
             show_std=True)
         ax1.sharey(ax0)
@@ -1501,7 +1501,7 @@ def talk_figs():
 
         # ---- Plot Graph ----
         ax0 = fig.add_subplot(gs[:, (m-n_box)//2:-n_box])
-        _, ax0 = plot_as_graph(
+        _, ax0 = pg.plots.graph(
             g, show_vertices=True, show_edges=True,ax=ax0,
             show_std=True)
         ax0.set_title(" ")

@@ -7,7 +7,6 @@ import matplotlib.pyplot as plt
 
 from multimet.preprocess import meteogram, jsonify, numpify
 import persigraph as pg
-from persigraph.persistentgraph.plots import *
 
 
 
@@ -121,7 +120,7 @@ def main():
         if save_spaghetti:
 
             # ------ Plot members ------
-            fig_m, ax_m = plot_members(
+            fig_m, ax_m = pg.plots.members(
                 members = members,
                 time_axis = data_dict['time'],
                 )
@@ -136,7 +135,7 @@ def main():
             fig_m.suptitle(data_dict["filename"])
 
             # ------ add mean and std------
-            # fig_m, ax_m = plot_mean_std(
+            # fig_m, ax_m = pg.plots.mean_std(
             #         members = members,
             #         time_axis = time,
             #         fig = fig_m,
@@ -245,14 +244,14 @@ def main():
 
                     # If overview:
                     if show_k_plot == 'overview':
-                        fig0, ax0 = plot_overview(
+                        fig0, ax0 = pg.plots.overview(
                             g, ax_kw=ax_kw, axs = None, fig= None,
                         )
                         name_fig += '_overview'
 
                     else:
                         pass
-                        # fig0, ax0 = plot_as_graph(
+                        # fig0, ax0 = pg.plots.graph(
                         #     g, show_vertices=True, show_edges=True, show_std = True,
                         #     ax_kw=ax_kw, ax = ax0, fig=fig0,
                         # )
