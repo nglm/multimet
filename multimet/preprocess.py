@@ -67,17 +67,17 @@ def extract_from_meteogram(
     :rtype: Dict
     """
     if var_names is None:
-        var_names =["t2m","d2m","msl","u10","v10","tcwv"]
+        var_names =['t2m','d2m','msl','u10','v10','tcwv']
     if isinstance(var_names, str):
         var_names = [var_names]
     if ind_time is None:
-        ind_time = np.arange(nc.variables["time"].size)
+        ind_time = np.arange(nc.variables['time'].size)
     if ind_members is None:
-        ind_members = np.arange(nc.variables["number"].size)
+        ind_members = np.arange(nc.variables['number'].size)
     if ind_long is None:
-        ind_long = np.arange(nc.variables["longitude"].size)
+        ind_long = np.arange(nc.variables['longitude'].size)
     if ind_lat is None:
-        ind_lat = np.arange(nc.variables["latitude"].size)
+        ind_lat = np.arange(nc.variables['latitude'].size)
     list_var = [np.array(nc.variables[name]) for name in var_names]
     list_var = [var[ind_time,:,:,:] for var in list_var]
     list_var = [var[:,ind_members,:,:] for var in list_var]
@@ -98,7 +98,7 @@ def extract_from_meteogram(
     d['members'] = list_var
     d['short_name'] = var_names
     d['var_name'] = var_names
-    d['time'] = nc.variables["time"][ind_time].data
+    d['time'] = nc.variables['time'][ind_time].data
     d['control'] = None
     d['long_name'] = [nc.variables[name].long_name for name in var_names]
     d['units'] = [nc.variables[name].units for name in var_names]
@@ -190,11 +190,11 @@ def meteogram(
     # Take the log for the tcwv variable
     idx = get_indices_element(
         my_list=data_dict['short_name'],
-        my_element="tcwv"
+        my_element='tcwv'
     )
     if idx != -1:
         if multivariate:
-            raise NotImplementedError("Multivariate with log tcwv")
+            raise NotImplementedError('Multivariate with log tcwv')
         for i in idx:
             data_dict['members'][i] = np.log(data_dict['members'][i])
 
@@ -202,18 +202,18 @@ def meteogram(
     if not to_standardize:
         idx = get_indices_element(
             my_list=data_dict['short_name'],
-            my_element="t2m"
+            my_element='t2m'
         )
         if idx != -1:
             if multivariate:
-                raise NotImplementedError("Multivariate with t2m in °C")
+                raise NotImplementedError('Multivariate with t2m in °C')
             for i in idx:
                 data_dict['members'][i] = data_dict['members'][i] - 273.15
 
     # If variables are to be standardized
     if to_standardize:
         if multivariate:
-            raise NotImplementedError("Multivariate with standardization")
+            raise NotImplementedError('Multivariate with standardization')
         (data_dict['scalers'], data_dict['members']) = standardize(
             list_var = data_dict['members'],
             each_loc = False,
@@ -303,13 +303,13 @@ def extract_from_mjo(
     d['members'] = members
     d['control'] = None
     if polar:
-        d['units'] = ["Radius", "Phase"]
-        d["short_name"] = ["radius", "phase"]
-        d['var_names'] = ["radius", "phase"]
+        d['units'] = ['Radius', 'Phase']
+        d['short_name'] = ['radius', 'phase']
+        d['var_names'] = ['radius', 'phase']
     else:
-        d['units'] = ["RMM1", "RMM2"]
-        d["short_name"] = ["rmm"]*2
-        d['var_names'] = ["rmm1", "rmm2"]
+        d['units'] = ['RMM1', 'RMM2']
+        d['short_name'] = ['rmm']*2
+        d['var_names'] = ['rmm1', 'rmm2']
     d['long_name'] = ['Real-Time Multivariate Index']*2
 
 
