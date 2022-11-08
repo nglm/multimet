@@ -223,17 +223,7 @@ def meteogram(
     data_dict['time'] -= data_dict['time'][0]
     return data_dict
 
-def clear_double_space(filename):
-    # Read in the file
-    with open(filename, 'r') as file :
-        filedata = file.read()
 
-    # Replace the target string
-    filedata = filedata.replace('  ', ' ')
-
-    # Write the file out again
-    with open(filename, 'w') as file:
-        file.write(filedata)
 
 def extract_from_mjo(
     filename: str,
@@ -338,20 +328,6 @@ def mjo(
         smooth=smooth,
         polar=polar,
     )
-
-def jsonify(data_dict):
-    res = dict(data_dict)
-    for key, item in res.items():
-        if isinstance(item, np.ndarray):
-            res[key] = item.tolist()
-    return res
-
-def numpify(data_dict):
-    res = dict(data_dict)
-    for key, item in res.items():
-        if isinstance(item, list):
-            res[key] = np.array(item)
-    return res
 
 def _draw_mjo_line(values, arc=True):
     # values[0] is the first element inside the very weak circle
