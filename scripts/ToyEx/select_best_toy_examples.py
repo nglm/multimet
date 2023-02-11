@@ -4,7 +4,7 @@ from os.path import isfile
 from shutil import copy2, copyfile
 
 
-PATH_FIG_PARENT = "/home/natacha/Documents/tmp/figs/toyexamples/"
+PATH_FIG_PARENT = "~/Documents/tmp/figs/toyexamples/"
 SUB_DIRS = ["spaghettis/", "true_distrib/", "spaghettis_true_distrib/", "data/"]
 PATH_BEST = PATH_FIG_PARENT + "best/"
 PATH_DISTRIB = ["2/gaussian/", "3/gaussian/", "N/gaussian/", "2/uniform/"]

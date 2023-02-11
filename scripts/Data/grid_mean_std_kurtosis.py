@@ -23,11 +23,11 @@ import cartopy
 
 # Absolute path to the files
 # type: str
-path_data = "/home/natacha/Documents/Work/Data/Bergen/"
+path_data = "~/Documents/Work/Data/Bergen/"
 
 # Choose the path where the figs will be saved
 # type: str
-path_fig_parent = "/home/natacha/Documents/tmp/figs/grid_mean_std_kurtosis/"
+path_fig_parent = "~/Documents/tmp/figs/grid_mean_std_kurtosis/"
 
 # Choose which variables should be ploted
 # type: List(str)

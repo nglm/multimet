@@ -57,17 +57,17 @@ show_k_plot = 'overview'
 
 # Absolute path to the files
 # type: str
-PATH_DATA = "/home/natacha/Documents/Work/Data/Bergen/"
+PATH_DATA = "~/Documents/Work/Data/Bergen/"
 
 # Choose the path where the figs will be saved
 # type: str
 PATH_FIG_ROOT = (
-    "/home/natacha/Documents/tmp/figs/PG/"
+    "~/Documents/tmp/figs/PG/"
     + PG_TYPE + "/" + '-'.join(var_names) + '/'
     + "/entire_graph/"
 )
 PATH_SPAGHETTI = (
-    "/home/natacha/Documents/tmp/figs/spaghetti/" + '-'.join(var_names) + '/'
+    "~/Documents/tmp/figs/spaghetti/" + '-'.join(var_names) + '/'
 )
 
 PATH_SPAG_FIG = PATH_SPAGHETTI + 'plots/'
@@ -168,7 +168,7 @@ def main():
                 if weights:
                     pass
                     # weights_file = (
-                    #     "/home/natacha/Documents/tmp/figs/global_variation_"
+                    #     "~/Documents/tmp/figs/global_variation_"
                     #     + var_names[0] +'/'
                     #     + "all_forecasts_max_distance.txt"
                     # )

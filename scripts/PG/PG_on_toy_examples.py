@@ -44,7 +44,7 @@ SCORE_TYPES = [
 ZERO_TYPE = 'bounds'
 
 
-PATH_FIG_PARENT = "/home/natacha/Documents/tmp/figs/toyexamples/"
+PATH_FIG_PARENT = "~/Documents/tmp/figs/toyexamples/"
 SUB_DIRS = ["spaghettis/", "true_distrib/", "spaghettis_true_distrib/", "data/"]
 PATH_BEST = PATH_FIG_PARENT+ "best/"
 PATH_OUTPUTS = "PG/" +PG_TYPE+"-mean_std/"

@@ -15,11 +15,11 @@ from multimet.utils.plt import plot_mean_and_std
 
 # Absolute path to the files
 # type: str
-PATH_DATA = "/home/natacha/Documents/Work/Data/Bergen/"
+PATH_DATA = "~/Documents/Work/Data/Bergen/"
 
 # Choose the path where the figs will be saved
 # type: str
-PATH_FIG_PARENT = "/home/natacha/Documents/tmp/figs/Exploration/Brute_Force/"
+PATH_FIG_PARENT = "~/Documents/tmp/figs/Exploration/Brute_Force/"
 
 # Choose which files should be used
 LIST_FILENAMES = listdir(PATH_DATA)

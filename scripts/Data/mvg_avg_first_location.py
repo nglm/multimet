@@ -26,11 +26,11 @@ var_names=['tcwv']
 
 # Absolute path to the files
 # type: str
-PATH_DATA= "/home/natacha/Documents/Work/Data/Bergen/"
+PATH_DATA= "~/Documents/Work/Data/Bergen/"
 
 # Choose the path where the figs will be saved
 # type: str
-PATH_FIG = "/home/natacha/Documents/tmp/figs/moving_avg_first_location/"
+PATH_FIG = "~/Documents/tmp/figs/moving_avg_first_location/"
 
 # Choose which instants should be ploted
 # type: ndarray(int)

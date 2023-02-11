@@ -17,11 +17,11 @@ from multimet.utils.plt import from_list_to_subplots
 
 # Absolute path to the files
 # type: str
-PATH_DATA = "/home/natacha/Documents/Work/Data/Bergen/"
+PATH_DATA = "~/Documents/Work/Data/Bergen/"
 
 # Choose the path where the figs will be saved
 # type: str
-PATH_FIG_PARENT = "/home/natacha/Documents/tmp/figs/first_location_std_mean_kurtosis/"
+PATH_FIG_PARENT = "~/Documents/tmp/figs/first_location_std_mean_kurtosis/"
 
 # Choose which variables should be ploted
 # type: List(str)

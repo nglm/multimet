@@ -9,11 +9,6 @@ from netCDF4 import Dataset
 
 import persigraph as pg
 
-from multimet.utils.nc import print_nc_dict
-from multimet.utils.plt import from_list_to_subplots
-
-
-
 # ---------------------------------------------------------
 # Parameters
 # ---------------------------------------------------------
@@ -43,12 +38,12 @@ SCORE_TYPES = [
 
 # Absolute path to the files
 # type: str
-PATH_DATA = "/home/natacha/Documents/Work/Data/MLVis2021/"
+PATH_DATA = "~/Documents/Work/Data/MLVis2021/"
 
 # Choose the path where the figs will be saved
 # type: str
 PATH_FIG_PARENT = (
-    "/home/natacha/Documents/tmp/figs/PG/MLVis/"
+    "~/Documents/tmp/figs/PG/MLVis/"
 )
 
 MEAN_LW = 2
@@ -124,7 +119,7 @@ def preprocess_MLVis_data(verbose = False):
                 int(d['nc'][0]['longitude'][0]), ',',
                 int(d['nc'][0]['latitude'][0]), ')')
             print(" ==== FORECAST ==== ")
-            print_nc_dict(d['nc'][0])
+            # print_nc_dict(d['nc'][0])
             # print(" ==== CONTROL ==== ")
             # print_nc_dict(d['ctrl_nc'][0])
             # print(" ==== OBSERVATION ==== ")

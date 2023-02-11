@@ -18,11 +18,11 @@ from multimet.utils.plt import from_list_to_pairplots
 
 # Absolute path to the files
 # type: str
-path_data = "/home/natacha/Documents/Work/Data/Bergen/"
+path_data = "~/Documents/Work/Data/Bergen/"
 
 # Choose the path where the figs will be saved
 # type: str
-path_fig = "/home/natacha/Documents/tmp/figs/pairplots_first_location_compare_t2m_tcvw_with_log/"
+path_fig = "~/Documents/tmp/figs/pairplots_first_location_compare_t2m_tcvw_with_log/"
 
 # Choose which variables should be ploted
 # type: List(str)

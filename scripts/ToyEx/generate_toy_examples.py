@@ -19,7 +19,7 @@ from .generate_data import (
 
 FIG_SIZE = (5,5)
 FIG_SIZE2 = (10,5)
-PATH_FIG_PARENT = "/home/natacha/Documents/tmp/figs/toyexamples/"
+PATH_FIG_PARENT = "~/Documents/tmp/figs/toyexamples/"
 SUB_DIRS = ["spaghettis/", "true_distrib/", "spaghettis_true_distrib/", "data/"]
 
 # Available:

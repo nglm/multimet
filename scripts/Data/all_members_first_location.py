@@ -26,12 +26,12 @@ var_names=['tcwv']
 
 # Absolute path to the files
 # type: str
-PATH_DATA = "/home/natacha/Documents/Work/Data/Bergen/"
+PATH_DATA = "~/Documents/Work/Data/Bergen/"
 
 # Choose the path where the figs will be saved
 # type: str
 PATH_FIG= (
-    "/home/natacha/Documents/tmp/figs/all_members_first_location/"
+    "~/Documents/tmp/figs/all_members_first_location/"
     + var_names[0] + '/'
 )
 

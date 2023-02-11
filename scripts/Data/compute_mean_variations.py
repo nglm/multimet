@@ -16,7 +16,7 @@ from multimet.utils.plt import from_list_to_subplots
 
 # Absolute path to the files
 # type: str
-path_data = "/home/natacha/Documents/Work/Data/Bergen/"
+path_data = "~/Documents/Work/Data/Bergen/"
 
 
 # Choose which variables should be ploted
@@ -33,7 +33,7 @@ var_names=["tcwv"]
 # Choose the path where the figs will be saved
 # type: str
 path_fig = (
-    "/home/natacha/Documents/tmp/figs/global_variation_"
+    "~/Documents/tmp/figs/global_variation_"
     + var_names[0] + "/")
 
 # Choose which instants should be ploted

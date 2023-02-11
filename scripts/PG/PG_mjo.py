@@ -61,16 +61,16 @@ show_k_plot = 'overview'
 
 # Absolute path to the files
 # type: str
-PATH_DATA = "/home/natacha/Documents/Work/Data/MJO/"
+PATH_DATA = "~/Documents/Work/Data/MJO/"
 
 # Choose the path where the figs will be saved
 # type: str
 PATH_FIG_ROOT = (
-    "/home/natacha/Documents/tmp/figs/PG/"
+    "~/Documents/tmp/figs/PG/"
     + PG_TYPE + "/mjo/entire_graph/"
 )
 PATH_SPAGHETTI = (
-    "/home/natacha/Documents/tmp/figs/spaghetti/mjo/"
+    "~/Documents/tmp/figs/spaghetti/mjo/"
 )
 PATH_SPAG_FIG = PATH_SPAGHETTI + 'plots/'
 PATH_SPAG_DICT = PATH_SPAGHETTI + 'dict/'
