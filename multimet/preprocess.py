@@ -231,6 +231,7 @@ def extract_from_mjo(
     path_data: str = '',
     smooth: bool = True,
     polar: bool = False,
+    max_T: int = None,
 ) -> Dict:
     """
     Extract "members, time" from MJO datafiles
@@ -250,6 +251,8 @@ def extract_from_mjo(
     :return: (members, time) of shape (N, 2, T) and (T) respectively
     :rtype: Dict
     """
+    if max_T is None:
+        max_T = 32
     # Find files
     names = [x for x in 'abcdefg']
     df = pd.read_csv(path_data + filename, sep=' ', names=names, header=1)
@@ -289,9 +292,11 @@ def extract_from_mjo(
         if smooth:
             members = smoothing_mjo(members)
 
+    T_final = min(T, max_T)
+
     d = {}
-    d['time'] = np.array(time)
-    d['members'] = members
+    d['time'] = np.array(time)[:T_final]
+    d['members'] = members[:,:,:T_final]
     d['control'] = None
     if polar:
         d['units'] = ['Radius', 'Phase']
@@ -321,6 +326,7 @@ def mjo(
     path_data: str = '',
     smooth: bool = False,
     polar: bool = False,
+    max_T: int = None,
     ):
     clear_double_space(path_data + filename)
     return extract_from_mjo(
@@ -328,6 +334,7 @@ def mjo(
         path_data=path_data,
         smooth=smooth,
         polar=polar,
+        max_T=max_T,
     )
 
 def _draw_mjo_line(values, arc=True):

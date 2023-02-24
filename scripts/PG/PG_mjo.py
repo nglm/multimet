@@ -16,8 +16,8 @@ import persigraph as pg
 # Parameters
 # ---------------------------------------------------------
 
-PG_TYPE = 'Naive'
-PG_TYPE = 'KMeans'
+MODEL_CLASS = 'Naive'
+MODEL_CLASS = 'KMeans'
 
 SCORE_TYPES = [
     'inertia',
@@ -47,10 +47,13 @@ SCORE_TYPES = ['inertia']
 ZERO_TYPE = 'bounds'
 
 # If True save spaghetti, if False, save graphs
-save_spaghetti = True
+save_spaghetti = False
 save_individual = False
 save_mean = True
 k_max = 4
+time_window = 7
+DTW = False
+squared_radius = True
 
 
 #FIXME: Outdated option
@@ -72,7 +75,7 @@ PATH_DATA = HOME+"/Documents/Work/Data/MJO/"
 # type: str
 PATH_FIG_ROOT = (
     HOME+"/Documents/tmp/figs/PG/"
-    + PG_TYPE + "/mjo/entire_graph/"
+    + MODEL_CLASS + "/mjo/entire_graph/"
 )
 PATH_SPAGHETTI = (
     HOME+"/Documents/tmp/figs/spaghetti/mjo/"
@@ -282,13 +285,16 @@ def main():
                     g = pg.PersistentGraph(
                             time_axis = time,
                             members = members,
+                            time_window = time_window,
                             weights = weights_values,
                             score_type = score,
                             zero_type = ZERO_TYPE,
-                            model_type = PG_TYPE,
+                            model_class = MODEL_CLASS,
                             k_max = k_max,
+                            squared_radius = squared_radius,
+                            DTW = DTW,
                     )
-                    g.construct_graph(verbose=True)
+                    g.construct_graph(verbose=False)
 
                     ax_kw = {
                         'xlabel' : "Time (h)",
