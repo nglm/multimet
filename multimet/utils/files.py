@@ -43,7 +43,9 @@ def save_as_json(obj, filename, path=""):
     class_dict = serialize(obj)
     # convert into a string representing a valid jsonfile
     json_str = json.dumps(class_dict, indent=4)
-    with open(path + filename + '.json', 'w', encoding='utf-8') as f:
+    if not filename[-5:] = ".json":
+        filename += ".json"
+    with open(path + filename, 'w', encoding='utf-8') as f:
         # save
         f.write(json_str)
 
