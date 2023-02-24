@@ -52,11 +52,12 @@ def save_as_json(obj, filename, path=""):
 def clear_double_space(filename):
     # Read in the file
     with open(filename, 'r') as file :
-        filedata = file.read()
+        filedata_origin = file.read()
 
     # Replace the target string
-    filedata = filedata.replace('  ', ' ')
+    filedata_final = filedata_origin.replace('  ', ' ')
 
     # Write the file out again
-    with open(filename, 'w') as file:
-        file.write(filedata)
+    if filedata_final != filedata_origin:
+        with open(filename, 'w') as file:
+            file.write(filedata_final)
