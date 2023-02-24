@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 from os import listdir, makedirs
+from pathlib import Path
 import numpy as np
 import json
 import matplotlib.pyplot as plt
 
-from multimet.preprocess import mjo, jsonify, to_polar
+import multimet as mm
+from multimet.preprocess import mjo, to_polar
 import persigraph as pg
 
 
@@ -39,14 +41,15 @@ SCORE_TYPES = [
     # ----------
     #'max_MedDevMed', # Shouldn't be used: see details below
 ]
-SCORE_TYPES = ['max_inertia']
+SCORE_TYPES = ['inertia']
 
 
 ZERO_TYPE = 'bounds'
 
-save_spaghetti = False
+# If True save spaghetti, if False, save graphs
+save_spaghetti = True
 save_individual = False
-save_mean = False
+save_mean = True
 k_max = 4
 
 
@@ -59,18 +62,20 @@ k_max = 4
 # - anything else if you just want the entire graph
 show_k_plot = 'overview'
 
+HOME = str(Path.home())
+
 # Absolute path to the files
 # type: str
-PATH_DATA = "~/Documents/Work/Data/MJO/"
+PATH_DATA = HOME+"/Documents/Work/Data/MJO/"
 
 # Choose the path where the figs will be saved
 # type: str
 PATH_FIG_ROOT = (
-    "~/Documents/tmp/figs/PG/"
+    HOME+"/Documents/tmp/figs/PG/"
     + PG_TYPE + "/mjo/entire_graph/"
 )
 PATH_SPAGHETTI = (
-    "~/Documents/tmp/figs/spaghetti/mjo/"
+    HOME+"/Documents/tmp/figs/spaghetti/mjo/"
 )
 PATH_SPAG_FIG = PATH_SPAGHETTI + 'plots/'
 PATH_SPAG_DICT = PATH_SPAGHETTI + 'dict/'
@@ -90,6 +95,7 @@ def main():
     weights = False
     weights_values = None
     for filename in LIST_FILENAMES:
+        print(filename)
         for smooth in [True, False]:
 
             # ---------------------------
@@ -152,12 +158,12 @@ def main():
                         json_file += '_smooth'
                     json_file += ".json"
                     with open(json_file, 'w', encoding='utf-8') as f:
-                        res = jsonify(data_dict_tmp)
+                        res = mm.utils.jsonify(data_dict_tmp)
                         json.dump(res, f, ensure_ascii=False, indent=4)
 
                 # ---- Plot mean (polar and not polar) ----
                 if save_mean:
-                    for polar_mean in [True, False]:
+                    for polar_mean in [False]:
 
                         if polar_mean:
                             members_tmp = to_polar(members)
@@ -250,6 +256,9 @@ def main():
                 fig.savefig(name_spag)
                 plt.close()
 
+            # ---------------------------
+            # Graphs
+            # ---------------------------
             else:
                 for score in SCORE_TYPES:
                     path_parent = PATH_FIG_ROOT + score + "/"
