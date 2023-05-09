@@ -41,7 +41,7 @@ SCORE_TYPES = [
     # ----------
     #'max_MedDevMed', # Shouldn't be used: see details below
 ]
-SCORE_TYPES = ['inertia']
+SCORE_TYPES = ['max_inertia']
 
 
 ZERO_TYPE = 'bounds'
@@ -52,7 +52,7 @@ save_individual = False
 save_mean = True
 k_max = 4
 time_window = 7
-DTW = False
+DTW = True
 squared_radius = True
 
 
