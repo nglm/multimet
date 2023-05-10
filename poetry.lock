@@ -569,7 +569,7 @@ tslearn = "^0.5.3.2"
 type = "git"
 url = "https://github.com/nglm/persigraph.git"
 reference = "HEAD"
-resolved_reference = "132835c02981e71442344b32944211091bf43f3f"
+resolved_reference = "ba8915566f4c4f2335cc38dbc62cef344d1e9573"
 
 [[package]]
 name = "pillow"

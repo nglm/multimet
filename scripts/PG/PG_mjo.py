@@ -99,7 +99,7 @@ def main():
     weights_values = None
     for filename in LIST_FILENAMES:
         print(filename)
-        for smooth in [True, False]:
+        for smooth in [False]:
 
             # ---------------------------
             # Load and preprocess data
