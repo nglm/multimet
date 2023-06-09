@@ -132,7 +132,7 @@ def plot_pg_mean_std(
 
     # k_plot
     ax1 = fig.add_subplot(gs[0, 2], sharex=ax0)
-    _, ax1, _ = k_plot(g, k_max = 5, ax=ax1)
+    _, ax1 = k_plot(g, k_max = 5, ax=ax1)
     ax1.set_xlabel("Time")
     ax1.set_ylabel("Relevance")
     ax1.set_title('Number of clusters: relevance')

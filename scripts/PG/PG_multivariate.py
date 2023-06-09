@@ -222,7 +222,7 @@ def main():
                     #         ax1 = fig0.add_subplot(gs[0, 2], sharex=ax0)
                     #     else:
                     #         ax1 = None
-                    #     fig1, ax1, _ = k_plot(g, k_max = 5, ax=ax1)
+                    #     fig1, ax1 = k_plot(g, k_max = 5, ax=ax1)
                     #     ax1_title = 'Number of clusters: relevance'
                     #     ax1.set_title(ax1_title)
                     #     ax1.set_xlabel("Time")
