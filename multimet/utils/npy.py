@@ -1,9 +1,5 @@
 import numpy as np
 
-def running_mean(vect, window):
-    cumsum = np.cumsum(np.insert(vect, 0, 0))
-    return (cumsum[window:] - cumsum[:-window]) / window
-
 def unpack_2d_dimensions(
     array,
     return_2d_array: bool = True,
