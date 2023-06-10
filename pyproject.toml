@@ -7,9 +7,9 @@ license = "MIT"
 
 [tool.poetry.dependencies]
 python = ">=3.8,<3.9"
-netCDF4 = "^1.6.0"
-pandas = "^1.4.3"
 persigraph = {git = "https://github.com/nglm/persigraph.git"}
+pandas = "^2.0.2"
+netcdf4 = "^1.6.4"
 
 
 [tool.poetry.dev-dependencies]
