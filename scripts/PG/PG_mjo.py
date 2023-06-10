@@ -51,8 +51,8 @@ save_spaghetti = False
 save_individual = False
 save_mean = True
 k_max = 4
-time_window = 7
-DTW = False
+time_window = 14
+DTW = True
 squared_radius = True
 
 

@@ -1,31 +1,12 @@
-from math import ceil, floor, sqrt
+from math import ceil, sqrt
 import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
-from scipy.stats import norm
-import seaborn as sns
-import pandas as pd
 from matplotlib.lines import Line2D
 
 from .npy import unpack_2d_dimensions
 
-# FIXME: remove xlabels and ylabels in the middle when xaxis and xaxis are
-# not shared
-# TODO: remove the prefix "list_" from "list_ax_titles/labels.etc"
-# TODO: hist type plot
-# TODO: change this:
-# params = {'legend.fontsize': 'x-large',
-#           'figure.figsize': (15, 5),
-#          'axes.labelsize': 'x-large',
-#          'axes.titlesize':'x-large',
-#          'xtick.labelsize':'x-large',
-#          'ytick.labelsize':'x-large'}
-# pylab.rcParams.update(params)
-# TODO: In set_list_list_legends: add the list to the existing legend
-
-
 def show_kwargs(verbose=True):
-    keys = {}
     fig_keys = [
         "nrows", "ncols", "figsize", "dpi", "sharex", "sharey", "squeeze",
     ]
@@ -57,23 +38,10 @@ def show_kwargs(verbose=True):
         "plot_mean_label", "plot_std_label",
 
     ]
-    kde_keys = [
-        "kde_label", "kde_color"
-    ]
-    fit_keys = [
-        "fit_type", "fit_label", "fit_color", "fit_show_mean", "fit_show_std",
-        "fit_ls",
-    ]
-    hist_keys = [
-        "hist_label", "hist_color"
-    ]
     dict_keys = {
         "font" : font_keys,
         "fig" : fig_keys,
         "text" : text_keys,
-        "kde" : kde_keys,
-        "fit" : fit_keys,
-        "hist" : hist_keys,
         "plot" : plot_keys,
         "line" : line_keys,
     }
@@ -94,15 +62,6 @@ def show_kwargs(verbose=True):
         print(line_keys)
         print("\n====== customize ======= ")
         print(plot_keys)
-        print("================================== ")
-        print("======== sns.distplot() ========== ")
-        print("================================== ")
-        print("\n========= kde ========== ")
-        print(kde_keys)
-        print("\n========= fit ========== ")
-        print(fit_keys)
-        print("\n=========  hist ======== ")
-        print(hist_keys)
     return(dict_keys)
 
 
@@ -596,14 +555,6 @@ def add_labels_to_legend(
         ax.legend(prev_handles, prev_labels, **dict_kwargs)
     return ax
 
-def move_legend(
-    ax1,
-    ax2,
-    legend_kwargs = {},
-):
-    handles, labels = ax1.get_legend_handles_labels()
-    ax2.legend(handles, labels, **legend_kwargs)
-
 def plot_mean_and_std(
     yvalues = None,
     mean_values = None,
@@ -695,140 +646,6 @@ def plot_mean_and_std(
 
     return fig, ax
 
-
-# def custom_plot(
-#     xvalues,
-#     yvalues,
-#     dict_kwargs = {},
-#     ax=None,
-#     fig=None,
-# ):
-#     """
-#     Add mean and std to multi-line plots
-
-#     :param xvalues: [description]
-#     :type xvalues: [type]
-#     :param yvalues: [description]
-#     :type yvalues: [type]
-#     :param dict_kwargs: [description]
-#     :type dict_kwargs: [type]
-#     :param ax: [description], defaults to None
-#     :type ax: [type], optional
-#     :param fig: [description], defaults to None
-#     :type fig: [type], optional
-#     :return: [description]
-#     :rtype: [type]
-#     """
-#     if ax is None:
-#         fig, ax = plt.subplots(**dict_kwargs['fig'])
-#     text_labels = []
-#     lines_labels = []
-#     if dict_kwargs['plot']['show_mean']:
-#         mean_line = np.mean(yvalues, axis=0)
-#         line = ax.plot(
-#             xvalues,
-#             mean_line,
-#             ls="--",
-#             c=dict_kwargs['plot']['mean_color'],
-#             lw=5,
-#             zorder=dict_kwargs['plot']['mean_zorder'],
-#         )
-#         if dict_kwargs['plot']['show_mean_label']:
-#             text_labels.append(dict_kwargs['plot']['show_mean_label'])
-#             lines_labels.append(line)
-#     if dict_kwargs['plot']['show_std']:
-#         mean_line = np.mean(yvalues, axis=0)
-#         std_values = np.std(yvalues, axis=0)
-#         std_line_sup = mean_line + std_values
-#         std_line_inf = mean_line - std_values
-#         # If alpha = 0 just show border lines
-#         if dict_kwargs['plot']['std_alpha'] == 0:
-#             ax.plot(
-#                 xvalues,std_line_inf,
-#                 ls="--", lw=2,
-#                 color=dict_kwargs['plot']['mean_color'],
-#                 zorder=dict_kwargs['plot']['std_zorder'],
-#             )
-#             line = ax.plot(
-#                 xvalues,std_line_sup,
-#                 ls="--", lw=2,
-#                 color=dict_kwargs['plot']['mean_color'],
-#                 zorder=dict_kwargs['plot']['std_zorder'],
-#             )
-#             if dict_kwargs['plot']['show_mean_label']:
-#                 text_labels.append("std")
-#                 lines_labels.append(line)
-
-#         # Else don't show border lines, just fill between them
-#         else:
-#             ax.fill_between(
-#                 xvalues,
-#                 std_line_inf, std_line_sup,
-#                 alpha=dict_kwargs['plot']['std_alpha'],
-#                 color=dict_kwargs['plot']['mean_color'],
-#                 zorder=dict_kwargs['plot']['std_zorder'],)
-#     if dict_kwargs['plot']['show_mean_label']:
-#         add_labels_to_legend(
-#             ax,
-#             text_labels=text_labels,
-#             lines=lines_labels,
-#         )
-
-#     return fig, ax
-
-
-
-def distrib_vs_gaussian(
-    ax,
-    distrib,
-    bins: int = 50,
-    dict_kwargs = {},
-):
-    fit_kw = dict_kwargs['fit']
-    if fit_kw["type"] == "norm":
-        (mu, sigma) = norm.fit(distrib)
-        fit = norm
-        label_fit = "Gaussian fit"
-    else:
-        fit = None
-        label_fit = ""
-        show_mean = False,
-        show_std = False
-    if fit_kw["type"] == "norm" and fit_kw.pop("show_mean"):
-        mu = f"{mu:.3}"
-        label_fit += " \n$\mu$=" + mu
-    if fit_kw["type"] == "norm" and fit_kw.pop("show_std"):
-        sigma = f"{sigma:.3}"
-        label_fit += "  \n$\sigma$=" + sigma
-    fit_kw.pop('type')  # we should remove this kw now
-    fit_kw["label"] = fit_kw.pop("label", label_fit)
-
-    distrib = distrib.flatten()
-    ax = sns.distplot(
-        distrib,
-        ax=ax,
-        fit=fit,
-        color="r",
-        bins=bins,
-        fit_kws=fit_kw,
-        hist_kws=dict_kwargs['hist'],
-        kde_kws=dict_kwargs['kde'],
-        #**dict_kwargs['dflt']
-    )
-    return ax
-
-def density_pair_plots(
-    fig,
-    ax,
-    xvalues,
-    yvalues,
-):
-    ax.hist2d(
-        xvalues, yvalues,
-        bins=(100, 100), density=True, cmap=plt.cm.Reds
-    )
-    return ax
-
 def set_text(
     axs,
     fig = None,
@@ -848,9 +665,6 @@ def set_text(
         set_list_fig_suptitle(fig, list_fig_suptitles=fig_suptitle, dict_kwargs=dict_kwargs)
     return fig, axs
 
-
-
-
 def from_list_to_subplots(
     list_yvalues,  # List[ndarray([n_lines, ] n_values )]
     list_xvalues=None,  # List[ndarray([1, ] n_values )]
@@ -867,7 +681,6 @@ def from_list_to_subplots(
 
     # Default kw values
     dict_kwargs = set_kwargs_default_values(dict_kwargs, plt_type)
-
 
     if not isinstance(list_yvalues, list):
         list_yvalues = [list_yvalues]
@@ -918,19 +731,6 @@ def from_list_to_subplots(
                     xvalues,
                     yvalues[i_line],
                     **dict_kwargs['dflt'])
-            elif plt_type == "distplot":
-                ax = distrib_vs_gaussian(
-                    ax=ax,
-                    distrib=yvalues,
-                    dict_kwargs = dict_kwargs,
-                )
-            elif plt_type == "density pairplot":
-                ax = density_pair_plots(
-                    fig=fig,
-                    ax=ax,
-                    xvalues=xvalues.squeeze(),
-                    yvalues=yvalues.squeeze(),
-                )
             else:
                 ax.plot(
                     xvalues,
@@ -964,26 +764,3 @@ def from_list_to_subplots(
     if is_axs_squeezed:
         axs = axs[0,0]
     return fig, axs
-
-def from_list_to_pairplots(
-    list_values,  # List[ndarray([1, ] n_values )]
-    list_labels = None,
-    show: bool = True,
-    dict_kwargs={},
-):
-    # First create a PandaDataFrame (makes things easier...)
-    nrows = len(list_values)
-    nplots = nrows*nrows
-    values = np.transpose(np.array(list_values))
-    if list_labels is None:
-        list_labels = ["Data " + str(i) for i in range(nrows)]
-    data = pd.DataFrame(data=values, columns=list_labels)
-
-    # Sort key_words because matplotlib doesn't support unexpected kw
-    axs = pd.plotting.scatter_matrix(
-        data,
-        alpha=0.3,
-        figsize=(32,18),
-        diagonal="kde"),
-    plt.rcdefaults()
-    return axs
