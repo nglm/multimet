@@ -337,6 +337,18 @@ def mjo(
         max_T=max_T,
     )
 
+def square_radius(X: np.ndarray) -> np.ndarray:
+    """
+    Returns r*X with r = sqrt(RMM1**2 + RMM2**2)
+
+    X of shape (N, T, d) or (N, d)
+    """
+    # r = sqrt(RMM1**2 + RMM2**2)
+    # r of shape (N, T, d) or (N, d)
+    r = np.sqrt(np.sum(np.square(X), axis=-1, keepdims=True))
+    # r*X gives the same angle but a squared radius
+    return r*X
+
 def _draw_mjo_line(values, arc=True):
     # values[0] is the first element inside the very weak circle
     # values[-1] is the last element inside the very weak circle

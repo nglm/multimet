@@ -6,7 +6,7 @@ import json
 import matplotlib.pyplot as plt
 
 import multimet as mm
-from multimet.preprocess import mjo, to_polar
+from multimet.preprocess import mjo, to_polar, square_radius
 import persigraph as pg
 
 
@@ -35,9 +35,9 @@ SCORE_TYPES = [
     #'diameter',      # WARNING: diameter should be used with weights
     #'max_diameter',  # WARNING: Max diameter should be used with weights
     # ----------
-    'MedDevMean',
-    'mean_MedDevMean',
-    'max_MedDevMean',
+    'MedDevCentroid',
+    'mean_MedDevCentroid',
+    'max_MedDevCentroid',
     # ----------
     #'max_MedDevMed', # Shouldn't be used: see details below
 ]
@@ -53,7 +53,7 @@ save_mean = True
 k_max = 4
 time_window = 14
 DTW = True
-squared_radius = True
+transformer = square_radius
 
 
 #FIXME: Outdated option
@@ -285,13 +285,13 @@ def main():
                     g = pg.PersistentGraph(
                             time_axis = time,
                             members = members,
-                            time_window = time_window,
+                            w = time_window,
                             weights = weights_values,
                             score_type = score,
                             zero_type = ZERO_TYPE,
                             model_class = MODEL_CLASS,
                             k_max = k_max,
-                            squared_radius = squared_radius,
+                            transformer = transformer,
                             DTW = DTW,
                     )
                     g.construct_graph(verbose=False)
