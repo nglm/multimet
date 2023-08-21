@@ -83,17 +83,18 @@ def extract_from_meteogram(
     list_var = [var[ind_time,:,:,:] for var in list_var]
     list_var = [var[:,ind_members,:,:] for var in list_var]
     list_var = [var[:,:,ind_long,:] for var in list_var]
+    # List of d (T, N, p, q) arrays
     list_var = [var[:,:,:,ind_lat] for var in list_var]
 
-    # Now List of d (N, t, p, q) arrays
+    # Now List of d (N, T, p, q) arrays
     list_var = [np.swapaxes(var, 0, 1).squeeze() for var in list_var]
 
     if multivariate:
-        # Now (N, d, t, p, q) arrays
-        list_var = np.swapaxes(list_var, 0, 1)
+        # Now (N, T, d, p, q) array
+        list_var = np.swapaxes(list_var, 0, 2)
     else:
-        # Now List of d (N, 1, t, p, q) arrays
-        list_var = [np.expand_dims(var, axis=1) for var in list_var]
+        # Now List of d (N, T, 1, p, q) arrays
+        list_var = [np.expand_dims(var, axis=2) for var in list_var]
 
     d = {}
     d['members'] = list_var
@@ -248,7 +249,7 @@ def extract_from_mjo(
 
     :param filename: filename (including path)
     :type filename: str,
-    :return: (members, time) of shape (N, 2, T) and (T) respectively
+    :return: (members, time) of shape (N, T, 2) and (T) respectively
     :rtype: Dict
     """
     if max_T is None:
@@ -265,30 +266,30 @@ def extract_from_mjo(
     time.sort()
     # Re-index time step in the df
     df[['a']] = df[['a']]//24-1
-    # Reshape to (N, 2, T) array
+    # Reshape to (N, T, 2) array
     N = int(df[['c']].max())+1
     T = int(df[['a']].max())+1
-    members = np.zeros((N, 2, T))
+    members = np.zeros((N, T, 2))
     if polar:
         # Find the right values
         for i in range(N):
             tmp = df[(df.c == i)]
             # Radius
-            members[i, 0, :] = tmp['f'].to_numpy()
+            members[i, :, 0] = tmp['f'].to_numpy()
             # Phase
-            members[i, 1, :] = np.arctan2(
+            members[i, :, 1] = np.arctan2(
                 tmp['e'].to_numpy(), tmp['d'].to_numpy()
             )
-            k = _get_2pi_k(members[i, 1, :])
-            members[i, 1, :] += 2*np.pi*k
+            k = _get_2pi_k(members[i, :, 1])
+            members[i, :, 1] += 2*np.pi*k
         if smooth:
             raise NotImplementedError('Extract polar coordinate from MJO not compatible with smoothing')
     else:
         # Find the right values
         for i in range(N):
             tmp = df[(df.c == i)]
-            members[i, 0, :] = tmp['d'].to_numpy()
-            members[i, 1, :] = tmp['e'].to_numpy()
+            members[i, :, 0] = tmp['d'].to_numpy()
+            members[i, :, 1] = tmp['e'].to_numpy()
         if smooth:
             members = smoothing_mjo(members)
 
@@ -296,7 +297,7 @@ def extract_from_mjo(
 
     d = {}
     d['time'] = np.array(time)[:T_final]
-    d['members'] = members[:,:,:T_final]
+    d['members'] = members[:, :T_final, :]
     d['control'] = None
     if polar:
         d['units'] = ['Radius', 'Phase']
@@ -400,17 +401,21 @@ def _draw_mjo_line(values, arc=True):
         else:
             return path
 
-def smoothing_mjo(members, cartesian=True, r=0.70):
+def smoothing_mjo(
+    members: np.ndarray,   # Shape (N, T, d)
+    cartesian=True,
+    r=0.70,
+):
     def cond(m, t):
         if cartesian:
-            return (np.sqrt(m[0, t]**2 + m[1, t]**2) <= r)
+            return (np.sqrt(m[t, 0]**2 + m[t, 1]**2) <= r)
         else:
-            return (m[0, t] <= r)
+            return (m[t, 0] <= r)
     # If radius < r, find the next time step with
     # a radius > r and draw an arc between them
     # To know the direction of the arc use a 1/3 - 2-3 rule since it is
     # supposed to go anti-clockwise
-    T = members.shape[-1]
+    (N, T, d) = members.shape
     for m in members:
         t = 0
         while (t < T):
@@ -420,12 +425,12 @@ def smoothing_mjo(members, cartesian=True, r=0.70):
                 t_start = t
                 t_end = t + 1
                 # The first element inside the very weak circle:
-                values.append(np.copy(m[:, t]))
+                values.append(np.copy(m[t]))
                 while (t_end < T and cond(m, t_end)):
                     # The last element inside the very weak circle:
-                    values.append(m[:, t_end])
+                    values.append(m[t_end])
                     t_end += 1
-                m[:, t_start:t_end] =_draw_mjo_line(
+                m[t_start:t_end] =_draw_mjo_line(
                     values, arc=True
                 )
                 # update t for the next loop
@@ -480,13 +485,13 @@ def to_polar(members):
     # if members is actually the mean for example
     if len(members.shape) == 2:
         # Radii
-        members_conv[0, :] = np.sqrt(members[0, :]**2 + members[1, :]**2)
+        members_conv[:, 0] = np.sqrt(members[:, 0]**2 + members[:, 1]**2)
         # Phase (arctan2(x1, x2) = arctan(x1/x2)) (range: [-pi, pi])
-        members_conv[1, :] = np.arctan2(members[1, :], members[0, :])
+        members_conv[:, 1] = np.arctan2(members[:, 1], members[:, 0])
         # transform to [0, 2pi] range
-        k = _get_2pi_k(members_conv[1, :])
-        members_conv[1, :] += 2*np.pi*k
-        assert np.all(members_conv[0, :]>=0)
+        k = _get_2pi_k(members_conv[:, 1])
+        members_conv[:, 1] += 2*np.pi*k
+        assert np.all(members_conv[:, 0]>=0)
     else:
         # Radii
         members_conv[:, 0, :] = np.sqrt(
@@ -505,9 +510,9 @@ def to_cartesian(members):
     # if members is actually the mean for example
     if len(members.shape) == 2:
         # RMM1 = r * cos(phi)
-        members_conv[0, :] = members[0, :] * np.cos(members[1, :])
+        members_conv[:, 0] = members[:, 0] * np.cos(members[:, 1])
         # RMM2 = r * sin(phi)
-        members_conv[1, :] = members[0, :] * np.sin(members[1, :])
+        members_conv[:, 1] = members[:, 0] * np.sin(members[:, 1])
     else:
         # RMM1 = r * cos(phi)
         members_conv[:, 0, :] = members[:, 0, :] * np.cos(members[:, 1, :])
