@@ -463,7 +463,7 @@ def select_best_examples():
         g = pg.PersistentGraph(
                 time_axis = d['time'][i][:max_t[k]],
                 members = d['var'][i][:, :max_t[k]],
-                score_type = score,
+                score = score,
                 zero_type = 'bounds',
                 model_type = 'KMeans',
                 k_max = 10,
@@ -595,7 +595,7 @@ def select_best_examples():
         g = pg.PersistentGraph(
                 time_axis = d['time'][i][:max_t[k]],
                 members = d['var'][i][:, :max_t[k]]/1000,
-                score_type = score,
+                score = score,
                 zero_type = 'bounds',
                 model_type = 'KMeans',
                 k_max = 10,
@@ -727,7 +727,7 @@ def select_best_examples():
         g = pg.PersistentGraph(
                 time_axis = d['time'][i][:max_t[k]],
                 members = members,
-                score_type = score,
+                score = score,
                 zero_type = 'bounds',
                 model_type = 'KMeans',
                 k_max = 10,
@@ -1005,7 +1005,7 @@ def main(show_obs=True):
                         g = pg.PersistentGraph(
                                 time_axis = d['time'][i],
                                 members = d['var'][i],
-                                score_type = score,
+                                score = score,
                                 zero_type = 'bounds',
                                 model_type = pg_type,
                                 k_max = 10,

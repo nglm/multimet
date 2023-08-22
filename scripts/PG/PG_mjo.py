@@ -287,7 +287,7 @@ def main():
                             members = members,
                             w = time_window,
                             weights = weights_values,
-                            score_type = score,
+                            score = score,
                             zero_type = ZERO_TYPE,
                             model_class = MODEL_CLASS,
                             k_max = k_max,

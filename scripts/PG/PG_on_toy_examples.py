@@ -95,7 +95,7 @@ def plot_pg_mean_std(
     g = None,
     xvalues=None,
     members=None,
-    score_type=None,
+    score=None,
     weights=None
 ):
 
@@ -110,7 +110,7 @@ def plot_pg_mean_std(
         g = pg.PersistentGraph(
             time_axis = xvalues,
             members = members,
-            score_type = score_type,
+            score = score,
             zero_type = ZERO_TYPE,
             model_type = PG_TYPE,
             weights=weights,
@@ -199,7 +199,7 @@ def rename_best():
 def re_plot_saved_graph():
     for i_type_best in range(len(best)):
         for name_fig in best[i_type_best]:
-            for score_type in SCORE_TYPES:
+            for score in SCORE_TYPES:
 
                 # ------------------------------------
                 # Find and copy data of best examples
@@ -208,7 +208,7 @@ def re_plot_saved_graph():
                     PATH_BEST
                     + PATH_DISTRIB[i_type_best]
                     + PATH_OUTPUTS
-                    + score_type+ "/"
+                    + score+ "/"
                 )
                 source_name_graph = source_name_parent + "graphs/"
 
@@ -224,7 +224,7 @@ def re_plot_saved_graph():
                     weights = None
 
                 # Generate and save output plots
-                g, fig, axs = plot_pg_mean_std(xvalues, members, score_type)
+                g, fig, axs = plot_pg_mean_std(xvalues, members, score)
                 dest_name_parent = None
                 dest_name_fig = dest_name_parent + "plots/"
                 makedirs(dest_name_fig, exist_ok = True)
@@ -244,7 +244,7 @@ def main():
 
     for i_type_best in range(len(best)):
         for name_fig in best[i_type_best]:
-            for score_type in SCORE_TYPES:
+            for score in SCORE_TYPES:
 
 
                 # ------------------------------------
@@ -272,13 +272,13 @@ def main():
                 g, fig, axs = plot_pg_mean_std(
                     xvalues = xvalues,
                     members = members,
-                    score_type = score_type
+                    score = score
                 )
                 dest_name_parent = (
                     PATH_BEST
                     + PATH_DISTRIB[i_type_best]
                     + PATH_OUTPUTS
-                    + score_type+ "/"
+                    + score+ "/"
                 )
                 dest_name_fig = dest_name_parent + "plots/"
                 makedirs(dest_name_fig, exist_ok = True)
@@ -293,7 +293,7 @@ def main():
                     g, fig, axs = plot_pg_mean_std(
                         xvalues = xvalues,
                         members = members,
-                        score_type = score_type,
+                        score = score,
                         weights = weights
                     )
                     fig.savefig(dest_name_fig + name_fig +"_with_weights.png")

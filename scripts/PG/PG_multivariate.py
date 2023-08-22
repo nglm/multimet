@@ -199,7 +199,7 @@ def main():
                             time_axis = data_dict['time'],
                             members = members,
                             weights = weights_values,
-                            score_type = score,
+                            score = score,
                             zero_type = ZERO_TYPE,
                             model_type = PG_TYPE,
                             k_max = 8,
